@@ -6,5 +6,5 @@
 2 - Execute o comando: 
 
 ```python
-    python tobor.py
+python tobor.py
 ```
