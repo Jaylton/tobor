@@ -17,7 +17,6 @@ def detect_contours(img):
 
         color = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
 
-        color = color[0:0+32, 0:0+32]
         canvas = color.copy()
         img = cv2.drawContours(color, contours, -1, (0, 255, 0), 1)
 
