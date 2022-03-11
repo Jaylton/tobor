@@ -32,20 +32,15 @@ if clientID != -1:
     sim.simxSetJointTargetVelocity(clientID, motorRight, 1, sim.simx_opmode_oneshot)
 
     time.sleep(0.1)
-    erro, robot = sim.simxGetObjectHandle(clientID, "RodaBoba", sim.simx_opmode_oneshot_wait)
-    errorCode, (position_x, position_y, position_z) = sim.simxGetObjectPosition(clientID, robot, -1, sim.simx_opmode_streaming)
 
     errorCode, visionSensorHandle = sim.simxGetObjectHandle(clientID, 'Vision_sensor', sim.simx_opmode_oneshot_wait)
     errprCode, resolution, image = sim.simxGetVisionSensorImage(clientID, visionSensorHandle, 0, sim.simx_opmode_streaming)
-    i = 0
     im = 0
     last_time = time.time()
     last_error = 0
-    r = 0
-    l = 0
+
     print('Start')
     while True:
-        i += 1
 
         errprCode, resolution, image = sim.simxGetVisionSensorImage(clientID, visionSensorHandle, 0, sim.simx_opmode_buffer)
         if len(image) > 0:
@@ -59,7 +54,7 @@ if clientID != -1:
                 gray, left_pixels, right_pixels, total, top_pixels, bottom_pixels = compare.compare(canvas)
                 saida = compare.sub(left_pixels, right_pixels)
                 dt = time_now - last_time
-                errorCode, (position_x, position_y, position_z) = sim.simxGetObjectPosition(clientID, robot, -1, sim.simx_opmode_buffer)
+
                 if dt == 0:
                     dt = 1
                 if((saida or saida == 0) and (last_error or last_error == 0)):

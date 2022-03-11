@@ -1,7 +1,5 @@
 
 import cv2
-import numpy as np
-import delete_files
 
 
 def detect_contours(img):
